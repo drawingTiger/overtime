@@ -46,8 +46,8 @@ body{
 /* ============ 顶部：年月 + 翻页 ============ */
 header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 .hd-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.hd-left{display:flex;align-items:center;gap:8px;min-width:0}
-.st{display:inline-flex;align-items:center;height:27px;padding:0 9px;border-radius:14px;font-size:15.5px;font-weight:700;letter-spacing:.04em;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif}
+.hd-left{display:flex;align-items:center;gap:9px;min-width:0}
+.st{display:inline-flex;align-items:center;line-height:1;height:27px;padding:0 9px;border-radius:14px;font-size:15.5px;font-weight:700;letter-spacing:.04em;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif}
 .st i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;flex:0 0 auto}
 .st.wen{background:var(--accent-soft);color:var(--accent)}
 .st.wen i{background:var(--accent)}
@@ -62,7 +62,7 @@ header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 .st.idle{background:#EDF1F3;color:var(--ink-faint)}
 .st.idle i{background:#8E9CA5}
 .month-btn{
-  display:flex;align-items:center;gap:8px;background:transparent;border:none;padding:6px 0 4px;
+  display:flex;align-items:center;gap:8px;background:transparent;border:none;padding:0;
   font-family:inherit;color:var(--ink);cursor:pointer;min-height:48px;text-align:left;
 }
 .ym{display:flex;align-items:baseline;gap:4px}
@@ -306,7 +306,6 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
           <b class="y num"><span id="yNum">2026</span><em>年</em></b>
           <b class="m num"><span id="mNum">11</span><em>月</em></b>
         </span>
-        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <span class="st wen" id="stChip" title="进度与日历同步"><i></i>稳</span>
       </div>
