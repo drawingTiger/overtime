@@ -30,7 +30,7 @@ html,body,button,input,select,label,.cell,.month-grid .mb{touch-action:manipulat
 body{
   background:var(--paper);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  font-size:15px;line-height:1.5;
+  font-size:16px;line-height:1.5;
   -webkit-font-smoothing:antialiased;
   padding-bottom:env(safe-area-inset-bottom);
 }
@@ -40,8 +40,8 @@ body{
 
 /* ============ 存储提示 ============ */
 .warn{display:none;margin:14px 0 0;padding:10px 12px;border:1px solid #E3C3C0;border-radius:6px;
-  background:#FBF2F1;color:#8E3B35;font-size:12px;line-height:1.6}
-.warn b{display:block;font-size:13px;margin-bottom:2px}
+  background:#FBF2F1;color:#8E3B35;font-size:13.5px;line-height:1.6}
+.warn b{display:block;font-size:14.5px;margin-bottom:2px}
 
 /* ============ 顶部：年月 + 翻页 ============ */
 header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
@@ -51,10 +51,10 @@ header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
   font-family:inherit;color:var(--ink);cursor:pointer;min-height:48px;text-align:left;
 }
 .ym{display:flex;align-items:baseline;gap:4px}
-.ym .y{font-size:15px;font-weight:500;color:var(--ink-soft);font-variant-numeric:tabular-nums}
-.ym .y em{font-style:normal;font-size:13px;color:var(--ink-faint);margin-left:1px}
-.ym .m{font-size:34px;font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-left:4px}
-.ym .m em{font-style:normal;font-size:15px;font-weight:500;color:var(--ink-soft);letter-spacing:0;margin-left:2px}
+.ym .y{font-size:16px;font-weight:500;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.ym .y em{font-style:normal;font-size:14.5px;color:var(--ink-faint);margin-left:1px}
+.ym .m{font-size:36px;font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-left:4px}
+.ym .m em{font-style:normal;font-size:16px;font-weight:500;color:var(--ink-soft);letter-spacing:0;margin-left:2px}
 .month-btn .chev{color:var(--ink-faint);margin-left:2px;margin-top:2px}
 .nav{display:flex;gap:0;border:1px solid var(--rule-strong);border-radius:24px;overflow:hidden;background:var(--paper-2)}
 .nav button{
@@ -63,41 +63,42 @@ header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 }
 .nav button+button{border-left:1px solid var(--rule)}
 .nav button:active{background:var(--accent-soft)}
-.nav .nav-today{width:auto;padding:0 13px;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.02em}
+.nav .nav-today{width:auto;padding:0 13px;font-size:13.5px;font-weight:600;color:var(--accent);letter-spacing:.02em}
 
 /* ============ 饱和度标尺 ============ */
 .gauge-block{padding:20px 0 14px;border-bottom:1px solid var(--rule)}
 .gauge-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .gauge-value{display:flex;align-items:baseline;gap:6px}
-.gauge-value b{font-size:44px;line-height:.95;font-weight:700;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-.gauge-value span{font-size:14px;color:var(--ink-soft)}
-.gauge-label{font-size:12px;color:var(--ink-faint);letter-spacing:.04em}
+.gauge-value b{font-size:46px;line-height:.95;font-weight:700;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.gauge-value span{font-size:15.5px;color:var(--ink-soft)}
+.gauge-label{font-size:13.5px;color:var(--ink-faint);letter-spacing:.04em}
 .track{position:relative;height:8px;background:#E7EBED;border-radius:2px;margin:14px 0 6px}
 .track .fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:2px}
 .track .mark{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink)}
-.scale{position:relative;display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);font-variant-numeric:tabular-nums;height:15px}
+.scale{position:relative;display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums;height:15px}
 .scale .goal{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;color:var(--accent)}
 .track .fill.ok{background:var(--makeup)}
-.gauge-note{margin-top:8px;font-size:12px;color:var(--ink-soft)}
+.gauge-note{margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
 
 /* ============ 数字条 ============ */
 .figures{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--rule)}
-.fig{padding:14px 0 13px;border-bottom:1px solid var(--rule)}
-.fig:nth-child(odd){padding-right:12px}
-.fig:nth-child(even){padding-left:14px;border-left:1px solid var(--rule)}
-.fig .k{font-size:12px;color:var(--ink-faint)}
-.fig .v{font-size:24px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.fig .v i{font-style:normal;font-size:12px;color:var(--ink-soft);margin-left:3px}
+.fig{padding:14px 0 13px;border-bottom:1px solid var(--rule);text-align:center}
+.fig:nth-child(odd){padding-right:0}
+.fig:nth-child(even){padding-left:0;border-left:1px solid var(--rule)}
+.fig .k{font-size:13.5px;color:var(--ink-faint);text-align:center}
+.fig .v{font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums;text-align:center}
+.fig .v i{margin-left:3px}
+.fig .v i{font-style:normal;font-size:13.5px;color:var(--ink-soft);margin-left:3px}
 
 /* ============ 日历 ============ */
 .calendar{padding-top:16px}
 .weekhead{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
-.weekhead span{text-align:center;font-size:12px;color:var(--ink-soft);padding:2px 0}
+.weekhead span{text-align:center;font-size:13.5px;color:var(--ink-soft);padding:2px 0}
 .weekhead span:nth-child(6),.weekhead span:nth-child(7){color:var(--holiday)}
 .grid{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
 .cell{
   position:relative;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);
-  aspect-ratio:1/1.22;min-height:0;padding:4px 2px 3px;background:var(--paper-2);
+  aspect-ratio:1/1.38;min-height:0;padding:4px 2px 3px;background:var(--paper-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
   cursor:pointer;text-align:center;font-family:inherit;
 }
@@ -107,32 +108,32 @@ header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 .cell.heat1{background:var(--heat-1)}
 .cell.heat2{background:var(--heat-2)}
 .cell.heat3{background:var(--heat-3)}
-.cell .dnum{font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;text-align:center}
-.cell .dnum .mon{font-size:10px;color:var(--ink-faint);margin-left:1px}
-.cell .slot{height:12px;display:flex;align-items:center;justify-content:center;width:100%}
+.cell .dnum{font-size:17.5px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.15;text-align:center}
+.cell .dnum .mon{font-size:11px;color:var(--ink-faint);margin-left:1px}
+.cell .slot{height:14px;display:flex;align-items:center;justify-content:center;width:100%}
 .cell .tag{
-  font-size:10px;line-height:1.2;color:var(--holiday);
+  font-size:11.5px;line-height:1.2;color:var(--holiday);
   display:block;max-width:100%;overflow:hidden;white-space:nowrap;text-align:center;
 }
 .cell .tag.makeup{color:var(--makeup)}
 .cell .val{
-  min-height:14px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;
+  min-height:17px;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;
   color:var(--ink);display:flex;align-items:center;justify-content:center;
 }
-.cell .val small{font-size:9px;font-weight:400;color:var(--ink-soft);margin-left:1px}
+.cell .val small{font-size:10px;font-weight:400;color:var(--ink-soft);margin-left:1px}
 
 /* ============ 周度 ============ */
 .wk-block{padding:18px 0 6px}
 .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
-.sec-head h2{font-size:13px;margin:0;letter-spacing:.03em;color:var(--ink-soft);font-weight:600}
-.sec-head .extra{font-size:12px;color:var(--ink-faint)}
+.sec-head h2{font-size:14.5px;margin:0;letter-spacing:.03em;color:var(--ink-soft);font-weight:600}
+.sec-head .extra{font-size:13.5px;color:var(--ink-faint)}
 table.wk{width:100%;border-collapse:collapse;table-layout:fixed}
 table.wk col:nth-child(1){width:24%}
 table.wk col:nth-child(2){width:22%}
 table.wk col:nth-child(3){width:22%}
 table.wk col:nth-child(4){width:16%}
 table.wk col:nth-child(5){width:16%}
-table.wk th,table.wk td{padding:9px 2px;font-size:12px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
+table.wk th,table.wk td{padding:9px 2px;font-size:13.5px;border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums}
 table.wk th{color:var(--ink-faint);font-weight:400;text-align:right}
 table.wk th:first-child,table.wk td:first-child{text-align:left}
 table.wk td{text-align:right;color:var(--ink)}
@@ -144,10 +145,10 @@ table.wk tr.total td{font-weight:600;border-bottom:none;border-top:1px solid var
 .set-card{border:1px solid var(--rule);border-radius:6px;background:var(--paper-2);padding:0 14px}
 .set-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
 .set-row+.set-row{border-top:1px solid var(--rule)}
-.set-row .lab{font-size:14px;line-height:1.35;min-width:0}
-.set-row .lab em{display:block;font-style:normal;font-size:11px;color:var(--ink-faint);margin-top:3px}
+.set-row .lab{font-size:15.5px;line-height:1.35;min-width:0}
+.set-row .lab em{display:block;font-style:normal;font-size:12px;color:var(--ink-faint);margin-top:3px}
 input[type="number"],input[type="date"]{
-  font-size:16px;font-family:inherit;padding:8px 10px;border:1px solid var(--rule-strong);
+  font-size:17.5px;font-family:inherit;padding:8px 10px;border:1px solid var(--rule-strong);
   border-radius:var(--radius);background:var(--paper-2);color:var(--ink);
   font-variant-numeric:tabular-nums;min-height:44px;
 }
@@ -159,35 +160,35 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
 .seg{display:flex;flex:0 0 auto;border:1px solid var(--rule-strong);border-radius:var(--radius);overflow:hidden}
 .seg button{
   width:40px;height:44px;border:none;background:var(--paper-2);color:var(--ink-soft);
-  font-size:14px;font-family:inherit;cursor:pointer;
+  font-size:15.5px;font-family:inherit;cursor:pointer;
 }
 .seg button+button{border-left:1px solid var(--rule)}
 .seg button.on{background:var(--accent);color:#fff;font-weight:600}
 .seg button.on[data-type="调休上班"]{background:var(--makeup)}
-.hol-add .btn{min-height:44px;padding:0 14px;flex:0 0 auto;font-size:14px}
+.hol-add .btn{min-height:44px;padding:0 14px;flex:0 0 auto;font-size:15.5px}
 
 .hol-list{max-height:266px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.hol-row{display:flex;align-items:center;gap:9px;padding:11px 12px;border-bottom:1px solid var(--rule);font-size:13px}
+.hol-row{display:flex;align-items:center;gap:9px;padding:11px 12px;border-bottom:1px solid var(--rule);font-size:14.5px}
 .hol-row:last-child{border-bottom:none}
 .hol-row .dot{width:6px;height:6px;border-radius:3px;flex:0 0 auto;background:var(--holiday)}
 .hol-row .dot.m{background:var(--makeup)}
 .hol-row .date{flex:0 0 auto;color:var(--ink);font-variant-numeric:tabular-nums}
-.hol-row .wk{flex:0 0 auto;font-size:12px;color:var(--ink-faint)}
-.hol-row .tag{margin-left:auto;flex:0 0 auto;font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid transparent}
+.hol-row .wk{flex:0 0 auto;font-size:13.5px;color:var(--ink-faint)}
+.hol-row .tag{margin-left:auto;flex:0 0 auto;font-size:12px;padding:2px 8px;border-radius:10px;border:1px solid transparent}
 .hol-row .tag.h{color:var(--holiday);background:#FBF2F1;border-color:#E8C8C5}
 .hol-row .tag.m{color:var(--makeup);background:#F1F8F4;border-color:#C8DED4}
-.hol-row .del{flex:0 0 auto;width:38px;height:38px;border:none;background:transparent;color:var(--ink-faint);font-size:17px;line-height:1;cursor:pointer}
+.hol-row .del{flex:0 0 auto;width:38px;height:38px;border:none;background:transparent;color:var(--ink-faint);font-size:19px;line-height:1;cursor:pointer}
 .hol-row .del:active{color:var(--ink)}
-.hol-empty{padding:16px 12px;font-size:12px;color:var(--ink-faint)}
+.hol-empty{padding:16px 12px;font-size:13.5px;color:var(--ink-faint)}
 
 .btn{
   min-height:44px;padding:0 16px;border:1px solid var(--rule-strong);background:var(--paper-2);
-  color:var(--ink);border-radius:var(--radius);font-size:14px;font-family:inherit;cursor:pointer;
+  color:var(--ink);border-radius:var(--radius);font-size:15.5px;font-family:inherit;cursor:pointer;
 }
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .btn.ghost{background:transparent}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.foot{padding:20px 0 34px;font-size:11px;color:var(--ink-faint);line-height:1.65}
+.foot{padding:20px 0 34px;font-size:12px;color:var(--ink-faint);line-height:1.65}
 
 /* ============ 底部输入面板 ============ */
 .sheet-mask{
@@ -204,25 +205,25 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
 .sheet.on{transform:translateY(0)}
 .sheet-grab{width:36px;height:4px;background:var(--rule-strong);border-radius:2px;margin:0 auto 12px}
 .sheet-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2px}
-.sheet-date{font-size:19px;font-weight:600;font-variant-numeric:tabular-nums}
-.sheet-type{font-size:12px;color:var(--ink-soft)}
-.sheet-rule{font-size:11px;color:var(--ink-faint);margin-bottom:14px}
+.sheet-date{font-size:21px;font-weight:600;font-variant-numeric:tabular-nums}
+.sheet-type{font-size:13.5px;color:var(--ink-soft)}
+.sheet-rule{font-size:12px;color:var(--ink-faint);margin-bottom:14px}
 .stepper{display:flex;align-items:center;gap:12px;margin:6px 0 14px}
 .stepper button{
   width:52px;height:52px;border:1px solid var(--rule-strong);background:var(--paper);
-  border-radius:var(--radius);font-size:22px;line-height:1;color:var(--ink);cursor:pointer;
+  border-radius:var(--radius);font-size:24px;line-height:1;color:var(--ink);cursor:pointer;
 }
-.stepper input{flex:1;text-align:center;font-size:26px;font-weight:600;padding:10px;height:52px}
+.stepper input{flex:1;text-align:center;font-size:28px;font-weight:600;padding:10px;height:52px}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chip{
   flex:1 1 auto;min-width:48px;min-height:40px;border:1px solid var(--rule-strong);background:var(--paper);
-  border-radius:18px;font-size:14px;color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums;
+  border-radius:18px;font-size:15.5px;color:var(--ink);cursor:pointer;font-variant-numeric:tabular-nums;
 }
 .chip:active{background:var(--accent-soft)}
 .type-row{display:flex;gap:8px;margin-bottom:8px}
 .type-row button{
   flex:1;min-height:44px;border:1px solid var(--rule-strong);background:var(--paper);
-  border-radius:var(--radius);font-size:12px;color:var(--ink-soft);cursor:pointer;font-family:inherit;
+  border-radius:var(--radius);font-size:13.5px;color:var(--ink-soft);cursor:pointer;font-family:inherit;
 }
 .type-row button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
 .sheet-actions{display:flex;gap:10px;margin-top:14px}
@@ -233,27 +234,27 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
 .year-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:4px 0 16px}
 .year-row button{
   width:48px;height:48px;border:1px solid var(--rule-strong);border-radius:24px;background:var(--paper-2);
-  font-size:18px;color:var(--ink);cursor:pointer;
+  font-size:19.5px;color:var(--ink);cursor:pointer;
 }
-.year-row .py{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;min-width:88px;text-align:center}
-.year-row .py em{font-style:normal;font-size:13px;color:var(--ink-faint);font-weight:400;margin-left:2px}
+.year-row .py{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;min-width:88px;text-align:center}
+.year-row .py em{font-style:normal;font-size:14.5px;color:var(--ink-faint);font-weight:400;margin-left:2px}
 .month-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:6px}
 .month-grid .mb{
   min-height:52px;border:1px solid var(--rule-strong);border-radius:var(--radius);background:var(--paper-2);
-  font-size:15px;color:var(--ink);cursor:pointer;font-family:inherit;font-variant-numeric:tabular-nums;
+  font-size:16px;color:var(--ink);cursor:pointer;font-family:inherit;font-variant-numeric:tabular-nums;
 }
 .month-grid .mb.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
 .pick-foot{text-align:center;margin-top:12px}
-.link-btn{background:none;border:none;color:var(--accent);font-size:13px;min-height:44px;cursor:pointer;font-family:inherit}
+.link-btn{background:none;border:none;color:var(--accent);font-size:14.5px;min-height:44px;cursor:pointer;font-family:inherit}
 
 /* ============ 分享/导入提示条 ============ */
 .toast{
   position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;
-  font-size:13px;padding:10px 16px;border-radius:4px;opacity:0;transition:.2s;z-index:30;pointer-events:none;
+  font-size:14.5px;padding:10px 16px;border-radius:4px;opacity:0;transition:.2s;z-index:30;pointer-events:none;
 }
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .banner{
-  border:1px solid var(--rule-strong);background:#FFFDF5;padding:12px 14px;margin-top:14px;font-size:13px;
+  border:1px solid var(--rule-strong);background:#FFFDF5;padding:12px 14px;margin-top:14px;font-size:14.5px;
   display:none;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
 }
 .banner.on{display:flex}
@@ -295,10 +296,10 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
         <button id="prevBtn" aria-label="上个月">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
         </button>
+        <button id="jumpBtn" class="nav-today" aria-label="回到本月" hidden>本月</button>
         <button id="nextBtn" aria-label="下个月">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
         </button>
-        <button id="jumpBtn" class="nav-today" aria-label="回到本月" hidden>本月</button>
       </div>
     </div>
   </header>
@@ -318,9 +319,9 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
         <b class="num" id="ratioVal">1.00</b>
         <span id="ratioState">标准负荷</span>
       </div>
-      <div class="gauge-label">月度饱和度</div>
+      <div class="gauge-label">当月饱和度</div>
     </div>
-    <div class="track" role="img" aria-label="月度饱和度标尺，考核线 1.24">
+    <div class="track" role="img" aria-label="当月饱和度标尺，考核线 1.24">
       <div class="fill" id="gaugeFill" style="width:50%"></div>
       <div class="mark" id="gaugeMark" style="left:62%" title="考核线 1.24"></div>
     </div>
@@ -334,8 +335,8 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
 
   <!-- ============ 四项数字 ============ -->
   <section class="figures">
-    <div class="fig"><div class="k">月度加班</div><div class="v num"><span id="fOt">0</span><i>小时</i></div></div>
-    <div class="fig"><div class="k">月度饱和度时长</div><div class="v num"><span id="fSat">0</span><i>小时</i></div></div>
+    <div class="fig"><div class="k">当月加班</div><div class="v num"><span id="fOt">0</span><i>小时</i></div></div>
+    <div class="fig"><div class="k">当月饱和度时长</div><div class="v num"><span id="fSat">0</span><i>小时</i></div></div>
     <div class="fig"><div class="k">工作日</div><div class="v num"><span id="fWd">21</span><i>天</i></div></div>
     <div class="fig"><div class="k">标准工时合计</div><div class="v num"><span id="fStd">147</span><i>小时</i></div></div>
   </section>
@@ -345,7 +346,7 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
     <div class="weekhead">
       <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
     </div>
-    <div class="grid" id="grid" aria-label="月度日历"></div>
+    <div class="grid" id="grid" aria-label="当月日历"></div>
   </section>
 
   <!-- ============ 周度 ============ -->
@@ -634,7 +635,7 @@ function render() {
 
   /* 标尺 */
   var r = info.ratio;
-  var GOAL = 1.24; /* 月度饱和度考核标准 */
+  var GOAL = 1.24; /* 当月饱和度考核标准 */
   var pos = Math.max(0, Math.min(2, r)) / 2 * 100;
   document.getElementById('ratioVal').textContent = fmt(r, 2);
   document.getElementById('ratioState').textContent = r >= 1.5 ? '远超考核线' :
@@ -973,7 +974,7 @@ document.getElementById('exportBtn').addEventListener('click', function () {
   lines.push('');
   lines.push(['合计', '', '', fmt(info.ot, 1), fmt(info.sat, 2)].join(','));
   lines.push(['工作日数', info.wd, '标准工时', fmt(S.cfg.std, 1), ''].join(','));
-  lines.push(['月度饱和度', fmt(info.ratio, 4), '', '', ''].join(','));
+  lines.push(['当月饱和度', fmt(info.ratio, 4), '', '', ''].join(','));
   download('工时账本-' + y + pad(m) + '.csv', '\uFEFF' + lines.join('\r\n'), 'text/csv;charset=utf-8');
   toast('已导出 CSV');
 });
