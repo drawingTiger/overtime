@@ -38,6 +38,11 @@ body{
 .serif{font-family:"Songti SC","STSong","Noto Serif SC",Georgia,serif}
 .wrap{max-width:600px;margin:0 auto;padding:0 18px}
 
+/* ============ 存储提示 ============ */
+.warn{display:none;margin:14px 0 0;padding:10px 12px;border:1px solid #E3C3C0;border-radius:6px;
+  background:#FBF2F1;color:#8E3B35;font-size:12px;line-height:1.6}
+.warn b{display:block;font-size:13px;margin-bottom:2px}
+
 /* ============ 顶部：年月 + 翻页 ============ */
 header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 .hd-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -270,6 +275,11 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
 <body>
 
 <div class="wrap">
+
+  <div class="warn" id="warn">
+    <b>本地存储不可用</b>
+    <span>当前浏览器可能处于无痕模式、App 内置浏览器，或页面被嵌入在其他站点里，记录关掉就没了。请用系统浏览器（Safari / Chrome）直接打开本页。</span>
+  </div>
 
   <!-- ============ 顶部月份 ============ -->
   <header>
@@ -507,6 +517,9 @@ var DEFAULT_STATE = {
 };
 
 var S = loadState();
+var STORAGE_OK = storageUsable();
+paintWarn(STORAGE_OK);
+
 
 function loadState() {
   try {
@@ -527,11 +540,28 @@ function loadState() {
     return JSON.parse(JSON.stringify(DEFAULT_STATE));
   }
 }
+function storageUsable() {
+  try {
+    var k = '__otlog_test__';
+    localStorage.setItem(k, '1');
+    localStorage.removeItem(k);
+    return true;
+  } catch (e) { return false; }
+}
+function paintWarn(ok) {
+  var el = document.getElementById('warn');
+  if (el) el.style.display = ok ? 'none' : 'block';
+}
+
 function saveState() {
   try {
     S.hv = 2;
     localStorage.setItem(KEY, JSON.stringify(S));
-  } catch (e) { toast('保存失败：浏览器存储不可用'); }
+    paintWarn(true);
+  } catch (e) {
+    paintWarn(false);
+    toast('保存失败：浏览器存储不可用');
+  }
 }
 
 /* ================= 计算层 ================= */
