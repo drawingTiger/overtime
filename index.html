@@ -45,7 +45,22 @@ body{
 
 /* ============ 顶部：年月 + 翻页 ============ */
 header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
-.hd-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hd-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hd-left{display:flex;align-items:center;gap:8px;min-width:0}
+.st{display:inline-flex;align-items:center;height:27px;padding:0 9px;border-radius:14px;font-size:15.5px;font-weight:700;letter-spacing:.04em;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif}
+.st i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;flex:0 0 auto}
+.st.wen{background:var(--accent-soft);color:var(--accent)}
+.st.wen i{background:var(--accent)}
+.st.ok{background:#E4F0E8;color:#1E6B4A}
+.st.ok i{background:#1E6B4A}
+.st.near{background:#FBF1DA;color:#8A6218}
+.st.near i{background:#C08A18}
+.st.run{background:#FBE7DB;color:#A0552A}
+.st.run i{background:#A0552A}
+.st.never{background:#FAE8E6;color:#A83A32}
+.st.never i{background:#A83A32}
+.st.idle{background:#EDF1F3;color:var(--ink-faint)}
+.st.idle i{background:#8E9CA5}
 .month-btn{
   display:flex;align-items:center;gap:8px;background:transparent;border:none;padding:6px 0 4px;
   font-family:inherit;color:var(--ink);cursor:pointer;min-height:48px;text-align:left;
@@ -78,7 +93,7 @@ header{padding:18px 0 14px;border-bottom:1px solid var(--rule)}
 .scale{position:relative;display:flex;justify-content:space-between;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums;height:15px}
 .scale .goal{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;color:var(--accent)}
 .track .fill.ok{background:var(--makeup)}
-.gauge-note{margin-top:8px;font-size:13.5px;color:var(--ink-soft)}
+.gauge-note{margin-top:10px;font-size:13.5px;line-height:1.55;color:var(--ink-soft);text-align:center}
 
 /* ============ 数字条 ============ */
 .figures{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--rule)}
@@ -285,6 +300,7 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
   <!-- ============ 顶部月份 ============ -->
   <header>
     <div class="hd-row">
+      <div class="hd-left">
       <button class="month-btn" id="monthBtn" aria-label="切换年月">
         <span class="ym">
           <b class="y num"><span id="yNum">2026</span><em>年</em></b>
@@ -292,6 +308,8 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
         </span>
         <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </button>
+      <span class="st wen" id="stChip" title="进度与日历同步"><i></i>稳</span>
+      </div>
       <div class="nav">
         <button id="prevBtn" aria-label="上个月">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
@@ -330,7 +348,7 @@ input[type="number"]{width:78px;text-align:right;flex:0 0 auto}
       <span class="goal" style="left:62%">考核 1.24</span>
       <span>2.00</span>
     </div>
-    <div class="gauge-note" id="gaugeNote">考核线 1.24　·　标准工时 7 小时／天</div>
+    <div class="gauge-note" id="gaugeNote">把每天加的小时记下来，月底一目了然。</div>
   </section>
 
   <!-- ============ 四项数字 ============ -->
@@ -612,6 +630,170 @@ function monthInfo(y, m) {
   return { days: days, rows: rows, ot: otSum, sat: satSum, wd: wd, std: stdTotal, ratio: ratio, perWeek: perWeek };
 }
 
+/* 标尺下方的一句提示：按进度与当月剩余时间说话 */
+function statusFor(info, y, m) {
+  var GOAL = 1.24, std = S.cfg.std;
+  var wd = info.wd, days = info.days, sat = info.sat, r = info.ratio;
+  var tp = todayParts(), nowIdx = tp.y * 12 + tp.m, mine = y * 12 + m;
+
+  if (!wd) return { key: 'rest', label: '休', cls: 'idle', full: '全月休息，没有工作日' };
+  if (mine > nowIdx) return { key: 'future', label: '未', cls: 'idle', full: '还没到这个月' };
+  if (r >= 1.5) return { key: 'over', label: '够', cls: 'ok', r: r, full: '够线了，而且已超出一截' };
+  if (r >= GOAL) return { key: 'ok', label: '够', cls: 'ok', r: r, full: '刚好达到考核线' };
+
+  var needTotal = wd * std * (GOAL - 1);
+  var need = Math.max(0, needTotal - sat);
+
+  var remainWd = 0;
+  if (mine === nowIdx) {
+    info.rows.forEach(function (row) {
+      row.forEach(function (c) { if (c && WORK_TYPES[c.type] && c.d >= tp.d) remainWd++; });
+    });
+  }
+
+  if (mine < nowIdx) return { key: 'pastBad', label: r >= 0.95 ? '差' : '摆',
+    cls: r >= 0.95 ? 'near' : 'never', need: need, full: '这个月已经结束，没到考核线' };
+  if (sat <= 0) return { key: 'empty', label: '差', cls: 'near', need: need, remainWd: remainWd, full: '这个月还没记过任何加班' };
+  if (!remainWd) return { key: 'never', label: '摆', cls: 'never', need: need, remainWd: 0, full: '工作日已用完，缺口补不上' };
+
+  var timeRate = Math.min(1, tp.d / days);
+  var prog = needTotal > 0 ? Math.min(1, sat / needTotal) : 0;
+  var gap = prog - timeRate;
+  var perDay = need / remainWd;
+
+  if (gap >= -0.12) return { key: 'stead', label: '稳', cls: 'wen', need: need, remainWd: remainWd, perDay: perDay, full: '进度与日历同步' };
+  if (gap > -0.35) return { key: 'close', label: '差', cls: 'near', need: need, remainWd: remainWd, perDay: perDay, full: '小幅落后，几天能补平' };
+  if (perDay <= 2.5) return { key: 'run', label: '跑', cls: 'run', need: need, remainWd: remainWd, perDay: perDay, full: '落后较多，但还追得上' };
+  return { key: 'never', label: '摆', cls: 'never', need: need, remainWd: remainWd, perDay: perDay, full: '落后太多，这个月补不上了' };
+}
+
+/* 标尺下方一句话：该加就加，够了就停 */
+function noteFor(st) {
+  var tp = todayParts();
+  function pick(arr) { return arr[(tp.d * 7 + S.ym.m) % arr.length]; }
+  function h(v) { return fmt(v, 1).replace('.0', ''); }
+  function H(v) { return fmt(v, 0); }
+  var n = st.need || 0, d = st.remainWd || 0, p = st.perDay || 0;
+
+  var S1 = {
+    over: [
+      '你是不是疯了？',
+      '再加也升不了职',
+      '多出来的那截，没人记得，只有你记得',
+      '加班加到溢出，图什么',
+      '这不叫努力，叫失控',
+      '公司该给你配张床，不是奖金',
+      '账面漂亮，人已经散架',
+      '你在用命换一个没人看的数字',
+      '绩效是 base 定的，不是你拼的',
+      '多出来的时间，全捐给公司了',
+      '这个月你加的不是班，是寂寞',
+      '明天还得上班，今天加这么狠干嘛',
+      '线在 1.24，你已经 1.6，收手',
+      '再往上冲，涨的是血压不是成绩',
+      '这点溢出没人买单，别演给谁看',
+      '加到这个份上，家里人还记得你长什么样吗',
+      '收工。再坐着只是让工时表好看'
+    ],
+    ok: [
+      '够了，收手',
+      '1.24 到手，剩下的班白送',
+      '达线了，谁劝你再加都别答应',
+      '别再往上加了，图什么',
+      '够线就下班，多坐一分钟都是亏',
+      '刚够线，别把“刚好”做成“卖命”',
+      '这个数是终点，不是起点',
+      '达标之后还加班，等于自愿降薪',
+      '停在这里，明天照常来',
+      '够用了，别把加班养成习惯',
+      '这行数字证明你合格，不证明你能熬',
+      '多一秒都不划算，走人'
+    ],
+    stead: [
+      '节奏刚好，照这个记',
+      '不欠也不溢，保持住',
+      '这个速度是对的，别手痒往上加',
+      '稳着来，按天记',
+      '今天不记，明天就得补两天的量',
+      '照这个走，月底刚好够线',
+      '不用加码，也不用松手',
+      '正常水平，正常加班，正常拿钱',
+      '进度和日历同步，这才是该有的样子',
+      '别为了表现多加，表现不加钱',
+      '匀速最省力，也最不容易崩',
+      '别急，日历还在帮你兜着'
+    ],
+    close: [
+      '还差一口气，几天就补平',
+      '每天 ' + h(p) + ' 小时，够线就停',
+      '别拖，拖到最后一天就来不及',
+      '缺的这点不难补，难的是你开始',
+      '差的是数量，不是能力',
+      '补平就收，别顺手往上冲',
+      '今天多一小时，月底少慌一天',
+      '落后不多，但落后就是在欠账',
+      '这几天补上，剩下的时间就是你自己的',
+      '别等周末，周末加得更狠也更累'
+    ],
+    run: [
+      '每天 ' + h(p) + ' 小时，跑起来',
+      '还剩 ' + d + ' 天，现在动来得及',
+      h(p) + ' 小时一天，别拖到最后一天才嚎',
+      '差距能补上，前提是今天就开始',
+      '这个数字还能救，只救一次',
+      '跑起来，别躺着等月底',
+      '现在开始每天 ' + h(p) + ' 小时，月底不用装忙',
+      '再不动，最后一周你会恨今天',
+      '还剩 ' + d + ' 天，够用，但不够你犹豫',
+      '每天 ' + h(p) + ' 小时，加满就停，别贪'
+    ],
+    never: [
+      '还有能扣的工资吗？',
+      '就这还指望绩效？',
+      d ? '每天 ' + h(p) + ' 小时也补不上，差 ' + H(n) + ' 小时' : '补不动了，这个月当样本',
+      '这个月别谈考核了，谈心态',
+      '数字已经不受你控制了',
+      '目标改成“活着下班”吧',
+      '这条线你够不到了，认了吧',
+      '剩下的日子，记着记录就行',
+      '别挣扎，把力气留给下个月',
+      '差 ' + H(n) + ' 小时，除非你会分身',
+      '说到底就一句：这个月加少了',
+      '加班额度欠到这个程度，考核只能放弃'
+    ],
+    empty: [
+      '一笔没记，是没加还是不敢记？',
+      '日历全白，本月加班额度为零',
+      '零记录。线在 1.24，你在 0',
+      '一整个月，一格没动',
+      '没记录就没有加班，这条规则对你很公平',
+      '空白对空白，考核对你也只能空白',
+      '记一笔有那么难？',
+      '自己都不记，还指望谁看见'
+    ],
+    pastBad: [
+      '封账了，差 ' + H(n) + ' 小时，补不回来',
+      '这页没及格，翻过去，复盘更难受',
+      '这个月欠了 ' + H(n) + ' 小时，下个月别再这样',
+      '定稿：不合格，接受它',
+      '数字留着，人往前走',
+      '上个月的事，翻篇，别回头骂自己'
+    ],
+    future: [
+      '还没到，先别急',
+      '日子没到。翻页可以，算账不行',
+      '先把这个月收干净，下个月再说',
+      '提前焦虑，没有加班费'
+    ],
+    rest: [
+      '全月休息，没法考核',
+      '没有工作日，加班这回事不存在'
+    ]  };
+
+  var arr = S1[st.key] || S1.stead;
+  return pick(arr);
+}
+
 function fmt(n, digits) {
   var v = Math.round(n * Math.pow(10, digits)) / Math.pow(10, digits);
   return v.toFixed(digits);
@@ -644,10 +826,12 @@ function render() {
   fill.style.width = pos + '%';
   fill.classList.toggle('ok', r >= GOAL);
   document.getElementById('gaugeMark').style.left = (GOAL / 2 * 100) + '%';
-  document.getElementById('gaugeNote').textContent =
-    '考核线 ' + fmt(GOAL, 2) + '　·　当前 ' + fmt(r, 2) +
-    (r >= GOAL ? '（超 ' + fmt(r - GOAL, 2) + '）' : '（差 ' + fmt(GOAL - r, 2) + '）') +
-    '　·　标准工时 ' + fmt(S.cfg.std, 1).replace('.0', '') + ' 小时／天';
+  var st = statusFor(info, y, m);
+  var chip = document.getElementById('stChip');
+  chip.innerHTML = '<i></i>' + st.label;
+  chip.title = st.full || st.label;
+  chip.className = 'st ' + st.cls;
+  document.getElementById('gaugeNote').textContent = noteFor(st);
 
   /* 数字条 */
   document.getElementById('fOt').textContent = fmt(info.ot, 1);
